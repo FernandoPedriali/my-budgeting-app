@@ -4,14 +4,13 @@ import class_example
 import function_example
 import home_page
 import theme
-
 from nicegui import app, ui
 
 
 # Example 1: use a custom page decorator directly and putting the content creation into a separate function
-@ui.page('/')
+@ui.page("/")
 def index_page() -> None:
-    with theme.frame('Potato'):
+    with theme.frame("Potato"):
         home_page.content()
 
 
@@ -24,4 +23,4 @@ class_example.ClassExample()
 # Example 4: use APIRouter as described in https://nicegui.io/documentation/page#modularize_with_apirouter
 app.include_router(api_router_example.router)
 
-ui.run(title='Modularization Example')
+ui.run(title="Modularization Example")
