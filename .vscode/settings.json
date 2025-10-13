@@ -51,5 +51,9 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   // Git
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+
+  // Spell Checker
+  "cSpell.language": "en,pt,pt_BR",
+  "cSpell.dictionaries": ["pt-br"]
 }
