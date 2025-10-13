@@ -1,6 +1,12 @@
 {
   // Python Interpreter
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+
+  // Environment Variables
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.executeInFileDir": false,
+
   // Formatting (Black)
   "python.formatting.provider": "black",
   "[python]": {
