@@ -1,13 +1,39 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Run NiceGUI App",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "app.main",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/frontend_nicegui"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Backend: FastAPI",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "backend.app.main:app",
+        "--reload",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000"
+      ],
+      "jinja": true,
+      "justMyCode": false
+    },
+    {
+      "name": "Frontend: NiceGUI",
+      "type": "python",
+      "request": "launch",
+      "module": "frontend.app.main",
+      "justMyCode": false
+    },
+    {
+      "name": "Tests: Pytest",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "backend/tests",
+        "-v"
+      ],
+      "justMyCode": false
+    }
+  ]
 }

@@ -4,29 +4,54 @@ __pycache__/
 *$py.class
 *.so
 .Python
-*.cpython-312.pyc
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
 # Virtual Environment
 .venv/
 venv/
-env/
 ENV/
+env/
 
-# IDEs
-.vscode/*
-!.vscode/settings.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite3
+
+# Docker
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
+# Alembic
+alembic/versions/*.pyc
