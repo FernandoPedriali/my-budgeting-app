@@ -10,7 +10,7 @@ from pathlib import Path
 
 def create_structure():
     """Cria a estrutura completa de pastas e arquivos __init__.py"""
-    
+
     # Estrutura de diretórios
     directories = [
         # Backend
@@ -24,7 +24,6 @@ def create_structure():
         "backend/app/utils",
         "backend/tests/unit",
         "backend/tests/integration",
-        
         # Frontend
         "frontend/app/components/base",
         "frontend/app/components/custom",
@@ -35,20 +34,16 @@ def create_structure():
         "frontend/app/theme",
         "frontend/static/images",
         "frontend/static/icons",
-        
         # Docker
         "docker",
-        
         # Docs
         "docs/api",
-        
         # GitHub
         ".github/workflows",
-        
         # VSCode
         ".vscode",
     ]
-    
+
     # Arquivos __init__.py que devem ser criados
     init_files = [
         # Backend
@@ -62,7 +57,6 @@ def create_structure():
         "backend/app/core/__init__.py",
         "backend/app/utils/__init__.py",
         "backend/tests/__init__.py",
-        
         # Frontend
         "frontend/app/__init__.py",
         "frontend/app/components/__init__.py",
@@ -74,7 +68,7 @@ def create_structure():
         "frontend/app/utils/__init__.py",
         "frontend/app/theme/__init__.py",
     ]
-    
+
     # Arquivos placeholder importantes
     placeholder_files = {
         "backend/app/main.py": '"""FastAPI Application Entry Point"""\n\n# TODO: Implement FastAPI app\n',
@@ -82,11 +76,9 @@ def create_structure():
         "backend/app/database.py": '"""Database Setup"""\n\n# TODO: Implement SQLAlchemy setup\n',
         "backend/alembic/env.py": '"""Alembic Environment Configuration"""\n\n# TODO: Configure Alembic\n',
         "backend/tests/conftest.py": '"""Pytest Fixtures"""\n\n# TODO: Implement fixtures\n',
-        
         "frontend/app/main.py": '"""NiceGUI Application Entry Point"""\n\n# TODO: Implement NiceGUI app\n',
         "frontend/app/config.py": '"""Frontend Configuration"""\n\n# TODO: Implement config\n',
-        "frontend/app/theme/styles.css": '/* Custom Styles */\n\n/* TODO: Add custom CSS */\n',
-        
+        "frontend/app/theme/styles.css": "/* Custom Styles */\n\n/* TODO: Add custom CSS */\n",
         ".env.example": """# Database
 DATABASE_URL=postgresql://user:password@localhost:5432/budgeting_app
 
@@ -103,7 +95,6 @@ FRONTEND_PORT=8080
 ENVIRONMENT=development
 DEBUG=True
 """,
-        
         ".gitignore": """# Python
 __pycache__/
 *.py[cod]
@@ -162,7 +153,6 @@ htmlcov/
 # Alembic
 alembic/versions/*.pyc
 """,
-        
         "README.md": """# My Budgeting App
 
 Sistema de controle financeiro pessoal desenvolvido em Python.
@@ -252,7 +242,6 @@ Este projeto está sob a licença MIT.
 
 Fernando Pedriali
 """,
-        
         "pyproject.toml": """[project]
 name = "my-budgeting-app"
 version = "0.1.0"
@@ -287,6 +276,11 @@ dev = [
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*", "frontend*"]
+exclude = ["docker*", "docs*", "*.tests*"]
+
 [tool.black]
 line-length = 100
 target-version = ['py311']
@@ -305,10 +299,7 @@ disallow_untyped_defs = true
 testpaths = ["backend/tests"]
 asyncio_mode = "auto"
 """,
-        
-        "docker-compose.yml": """version: '3.8'
-
-services:
+        "docker-compose.yml": """services:
   postgres:
     image: postgres:16-alpine
     container_name: budgeting_db
@@ -360,7 +351,6 @@ services:
 volumes:
   postgres_data:
 """,
-        
         "alembic.ini": """# A generic, single database configuration.
 
 [alembic]
@@ -402,28 +392,62 @@ formatter = generic
 format = %(levelname)-5.5s [%(name)s] %(message)s
 datefmt = %H:%M:%S
 """,
-        
         ".vscode/settings.json": """{
+  // Python Interpreter
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+
+  // Formatting (Black)
   "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": false,
-  "python.linting.ruffEnabled": true,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.tabSize": 4
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
   },
+
+  // Linting (Ruff only)
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.ruffEnabled": true,
+
+  // Code Actions on Save
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": false
+  },
+
+  // Ruff Configuration (using native server settings)
+  "ruff.lineLength": 100,
+  "ruff.lint.select": ["E", "F", "I"],  // E=pycodestyle, F=pyflakes, I=isort
+
+  // Type Checking
+  "python.analysis.typeCheckingMode": "basic",
+
+  // Testing
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+
+  // Files to Hide
   "files.exclude": {
     "**/__pycache__": true,
-    "**/*.pyc": true
-  }
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true
+  },
+
+  // Editor
+  "editor.rulers": [100],
+  "editor.wordWrap": "off",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Git
+  "git.ignoreLimitWarning": true
 }
 """,
-        
         ".vscode/launch.json": """{
   "version": "0.2.0",
   "configurations": [
@@ -464,7 +488,52 @@ datefmt = %H:%M:%S
   ]
 }
 """,
-        
+        ".vscode/extensions.json": """{
+  "recommendations": [
+    // Python Essentials
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "charliermarsh.ruff",
+
+    // Testing
+    "littlefoxteam.vscode-python-test-adapter",
+
+    // Database
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // Productivity
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "wayou.vscode-todo-highlight",
+
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+
+    // YAML/TOML
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+
+    // REST Client
+    "humao.rest-client",
+
+    // UI/Theme
+    "pkief.material-icon-theme",
+    "github.github-vscode-theme"
+  ]
+}
+""",
         "docker/backend.Dockerfile": """FROM python:3.11-slim
 
 WORKDIR /app
@@ -486,7 +555,6 @@ COPY backend ./backend
 
 CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 """,
-        
         "docker/frontend.Dockerfile": """FROM python:3.11-slim
 
 WORKDIR /app
@@ -502,7 +570,6 @@ COPY frontend ./frontend
 
 CMD ["python", "-m", "frontend.app.main"]
 """,
-        
         "docs/development.md": """# Guia de Desenvolvimento
 
 ## Setup do Ambiente
@@ -587,31 +654,31 @@ pytest backend/tests/integration/
 - Máximo 100 caracteres por linha
 """,
     }
-    
+
     print("🚀 Criando estrutura do projeto my-budgeting-app...\n")
-    
+
     # Criar diretórios
     print("📁 Criando diretórios...")
     for directory in directories:
         path = Path(directory)
         path.mkdir(parents=True, exist_ok=True)
         print(f"   ✓ {directory}")
-    
+
     # Criar arquivos __init__.py
     print("\n📄 Criando arquivos __init__.py...")
     for init_file in init_files:
         path = Path(init_file)
         path.touch(exist_ok=True)
         print(f"   ✓ {init_file}")
-    
+
     # Criar arquivos placeholder
     print("\n📝 Criando arquivos de configuração...")
     for file_path, content in placeholder_files.items():
         path = Path(file_path)
         if not path.exists():
-            path.write_text(content, encoding='utf-8')
+            path.write_text(content, encoding="utf-8")
             print(f"   ✓ {file_path}")
-    
+
     print("\n✨ Estrutura criada com sucesso!")
     print("\n📋 Próximos passos:")
     print("   1. cd my-budgeting-app")

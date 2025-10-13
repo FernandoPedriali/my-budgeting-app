@@ -1,19 +1,49 @@
 {
+  // Python Interpreter
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  // Formatting (Black)
   "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": false,
-  "python.linting.ruffEnabled": true,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.tabSize": 4
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
   },
+  // Linting (Ruff only)
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.ruffEnabled": true,
+  // Code Actions on Save
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "never"
+  },
+  // Ruff Configuration
+  "ruff.lineLength": 100,
+  "ruff.lint.select": ["E", "F", "I"],  // E=pycodestyle, F=pyflakes, I=isort
+
+  // Type Checking
+  "python.analysis.typeCheckingMode": "basic",
+  // Testing
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  // Files to Hide
   "files.exclude": {
     "**/__pycache__": true,
-    "**/*.pyc": true
-  }
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true
+  },
+  // Editor
+  "editor.rulers": [
+    100
+  ],
+  "editor.wordWrap": "off",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  // Git
+  "git.ignoreLimitWarning": true
 }
