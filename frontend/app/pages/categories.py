@@ -370,3 +370,5 @@ async def delete_category(dialog):
         else:
             notify_error(f"Erro ao excluir categoria: {error_msg}")
             notify_error(f"Erro ao excluir categoria: {error_msg}")
+            notify_error(f"Erro ao excluir categoria: {error_msg}")
+            notify_error(f"Erro ao excluir categoria: {error_msg}")

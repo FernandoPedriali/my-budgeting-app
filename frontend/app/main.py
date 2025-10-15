@@ -1,6 +1,6 @@
 """Main entry point for the NiceGUI frontend application."""
 
-from nicegui import ui
+from nicegui import app, ui
 
 from frontend.app.config import settings
 
@@ -14,9 +14,7 @@ from frontend.app.pages import (
 )
 
 
-def main():
-    """Initialize and run the NiceGUI application."""
-
+def setup_ui():
     # Configure dark mode
     ui.dark_mode().enable()
 
@@ -46,6 +44,13 @@ def main():
     """
     )
 
+
+app.on_startup(setup_ui)
+
+
+def main():
+    """Initialize and run the NiceGUI application."""
+    categories_page()
     # Run the application
     ui.run(
         host=settings.FRONTEND_HOST,
