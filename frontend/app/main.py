@@ -36,10 +36,6 @@ def setup_ui():
                 text-decoration: none !important;
             }
 
-            /* Smooth transitions */
-            * {
-                transition: background-color 0.2s ease, color 0.2s ease;
-            }
         </style>
     """
     )

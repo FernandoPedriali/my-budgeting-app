@@ -251,7 +251,7 @@ Row:
 
 ## 🎨 Ícones
 
-### **Biblioteca**: Lucide Icons (via NiceGUI)
+### **Biblioteca**: Material Icons (via NiceGUI/Quasar)
 
 ### **Tamanhos**
 - **xs**: 16px
@@ -262,13 +262,13 @@ Row:
 
 ### **Ícones Principais**
 - **Home**: `home`
-- **Categorias**: `tag`, `folder`
-- **Contas**: `wallet`, `credit-card`, `bank`
-- **Transações**: `arrow-up-right` (receita), `arrow-down-left` (despesa)
-- **Adicionar**: `plus`
-- **Editar**: `pencil`
-- **Deletar**: `trash-2`
-- **Filtrar**: `filter`
+- **Categorias**: `label`, `folder`
+- **Contas**: `wallet`, `credit_card`, `bank`
+- **Transações**: `arrow_upward` (receita), `arrow_downward` (despesa)
+- **Adicionar**: `add`
+- **Editar**: `edit`
+- **Deletar**: `delete`
+- **Filtrar**: `filter_list`
 - **Buscar**: `search`
 - **Configurações**: `settings`
 

@@ -139,7 +139,7 @@ async def load_categories():
 
     try:
         response = await api.get_categories(is_active=True)
-        state.categories = response.get("items", [])
+        state.categories = response.get("categories", [])
         state.filtered_categories = state.categories
         render_categories()
     except Exception as e:
@@ -154,7 +154,7 @@ def render_categories():
 
     with state.categories_container:
         if state.loading:
-            create_skeleton_loader(size="lg", overlay=False)
+            create_skeleton_loader(lines=5)
         elif not state.filtered_categories:
             if state.search_query or state.filter_type:
                 create_empty_state(
@@ -275,25 +275,25 @@ def open_category_modal(category: Optional[dict] = None):
             desc_input.on("input", lambda e: form_data.update({"description": e.value}))
 
             # Color picker
-            with ui.column().classes("gap-2 w-full"):
-                ui.label("Cor").classes("text-sm font-medium")
-                create_color_picker(
-                    value=form_data["color"],
-                    on_change=lambda color: form_data.update({"color": color}),
-                )
+            create_color_picker(
+                label="Cor",
+                value=form_data["color"],
+                on_change=lambda color: form_data.update({"color": color}),
+            )
 
             # Icon picker
-            with ui.column().classes("gap-2 w-full"):
-                ui.label("Ícone").classes("text-sm font-medium")
-                create_icon_picker(
-                    value=form_data["icon"], on_change=lambda icon: form_data.update({"icon": icon})
-                )
+
+            create_icon_picker(
+                label="Ícone",
+                value=form_data["icon"],
+                on_change=lambda icon: form_data.update({"icon": icon}),
+            )
 
         # Actions
         with ui.row().classes("w-full justify-end gap-2 mt-4"):
-            create_button(label="Cancelar", on_click=dialog.close, variant="ghost")
+            create_button("Cancelar", on_click=dialog.close, variant="secondary")
             create_button(
-                label="Salvar" if is_edit else "Criar",
+                "Salvar" if is_edit else "Criar",
                 on_click=lambda: save_category(form_data, is_edit, dialog),
                 variant="primary",
             )
@@ -347,10 +347,8 @@ def open_delete_modal(category: dict):
 
         # Actions
         with ui.row().classes("w-full justify-end gap-2 mt-4"):
-            create_button(label="Cancelar", on_click=dialog.close, variant="ghost")
-            create_button(
-                label="Excluir", on_click=lambda: delete_category(dialog), variant="error"
-            )
+            create_button("Cancelar", on_click=dialog.close, variant="ghost")
+            create_button("Excluir", on_click=lambda: delete_category(dialog), variant="error")
 
 
 async def delete_category(dialog):
