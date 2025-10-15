@@ -1,6 +1,6 @@
 """Design System - Typography."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -63,16 +63,17 @@ class Typography:
     mono: str = "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', monospace"
 
     # Tamanhos
-    size: FontSize = FontSize()
+    # 🔧 FIX: Usar field(default_factory=...) para evitar mutable default error
+    size: FontSize = field(default_factory=FontSize)
 
     # Pesos
-    weight: FontWeight = FontWeight()
+    weight: FontWeight = field(default_factory=FontWeight)
 
     # Line Heights
-    line_height: LineHeight = LineHeight()
+    line_height: LineHeight = field(default_factory=LineHeight)
 
     # Letter Spacing
-    letter_spacing: LetterSpacing = LetterSpacing()
+    letter_spacing: LetterSpacing = field(default_factory=LetterSpacing)
 
 
 # Instância global

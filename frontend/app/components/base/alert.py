@@ -1,6 +1,6 @@
 """Alert component."""
 
-from typing import Literal
+from typing import Literal, Optional
 
 from nicegui import ui
 
@@ -98,7 +98,7 @@ def create_banner_alert(
     message: str,
     type: AlertType = "info",
     action_text: str | None = None,
-    on_action: callable | None = None,
+    on_action: Optional[callable] = None,
 ) -> ui.element:
     """
     Cria banner alert (estilo notificação no topo).

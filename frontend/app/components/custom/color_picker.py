@@ -1,6 +1,6 @@
 """Color picker component."""
 
-from typing import Callable
+from typing import Any, Callable
 
 from nicegui import ui
 

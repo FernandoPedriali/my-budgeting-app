@@ -1,7 +1,7 @@
 """Currency input component."""
 
 from decimal import Decimal
-from typing import Callable
+from typing import Any, Callable
 
 from nicegui import ui
 
