@@ -50,7 +50,6 @@ app.on_startup(setup_ui)
 
 def main():
     """Initialize and run the NiceGUI application."""
-    categories_page()
     # Run the application
     ui.run(
         host=settings.FRONTEND_HOST,

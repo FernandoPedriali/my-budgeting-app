@@ -6,8 +6,7 @@ from nicegui import ui
 
 from frontend.app.components.base.button import create_button, create_icon_button
 from frontend.app.components.base.empty_state import create_empty_state
-from frontend.app.components.base.loader import create_spinner
-from frontend.app.components.base.modal import create_button
+from frontend.app.components.base.loader import create_skeleton_loader
 from frontend.app.components.custom.color_picker import create_color_picker
 from frontend.app.components.custom.icon_picker import create_icon_picker
 from frontend.app.layouts.base_layout import create_base_layout
@@ -60,7 +59,7 @@ def create_header():
         ui.label("Gerencie suas categorias").classes("text-gray-600 dark:text-gray-400")
 
         create_button(
-            label="Nova Categoria",
+            text="Nova Categoria",
             icon="add",
             on_click=lambda: open_category_modal(),
             variant="primary",
@@ -155,7 +154,7 @@ def render_categories():
 
     with state.categories_container:
         if state.loading:
-            create_spinner(size="lg", overlay=False)
+            create_skeleton_loader(size="lg", overlay=False)
         elif not state.filtered_categories:
             if state.search_query or state.filter_type:
                 create_empty_state(
@@ -168,8 +167,8 @@ def render_categories():
                     icon="label_off",
                     title="Nenhuma categoria cadastrada",
                     description="Crie sua primeira categoria para começar a organizar suas finanças",
-                    action_label="Criar Categoria",
-                    action=lambda: open_category_modal(),
+                    action_text="Criar Categoria",
+                    on_action=lambda: open_category_modal(),
                 )
         else:
             # Grid of category cards
@@ -278,7 +277,7 @@ def open_category_modal(category: Optional[dict] = None):
             # Color picker
             with ui.column().classes("gap-2 w-full"):
                 ui.label("Cor").classes("text-sm font-medium")
-                color_value = create_color_picker(
+                create_color_picker(
                     value=form_data["color"],
                     on_change=lambda color: form_data.update({"color": color}),
                 )
@@ -286,7 +285,7 @@ def open_category_modal(category: Optional[dict] = None):
             # Icon picker
             with ui.column().classes("gap-2 w-full"):
                 ui.label("Ícone").classes("text-sm font-medium")
-                icon_value = create_icon_picker(
+                create_icon_picker(
                     value=form_data["icon"], on_change=lambda icon: form_data.update({"icon": icon})
                 )
 
@@ -368,7 +367,4 @@ async def delete_category(dialog):
                 "Não é possível excluir esta categoria pois ela está sendo usada em transações"
             )
         else:
-            notify_error(f"Erro ao excluir categoria: {error_msg}")
-            notify_error(f"Erro ao excluir categoria: {error_msg}")
-            notify_error(f"Erro ao excluir categoria: {error_msg}")
             notify_error(f"Erro ao excluir categoria: {error_msg}")

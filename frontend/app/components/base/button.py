@@ -61,9 +61,10 @@ def create_button(
     button = ui.button(
         text,
         on_click=on_click,
-        icon=icon if not icon_right else None,
-        icon_right=icon if icon_right else None,
+        icon=icon,
     )
+    if icon_right and icon:
+        button.props("icon-right")
 
     # Aplicar estilos
     bg_color = colors.get(variant, colors["primary"])

@@ -9,6 +9,10 @@ def create_sidebar():
     Returns:
         Container with sidebar content
     """
+    # 1. Instanciação explícita do objeto de modo escuro para garantir o contexto de sessão.
+    # O objeto 'dark_mode_element' é agora o 'owner' válido esperado pelo sistema de binding.
+    dark_mode_element = ui.dark_mode()
+
     with ui.column().classes(
         "w-64 h-screen bg-gray-100 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800"
     ) as sidebar:
@@ -48,7 +52,7 @@ def create_sidebar():
         # Dark mode toggle at bottom
         with ui.row().classes("w-full p-4 items-center justify-between"):
             ui.label("Modo Escuro").classes("text-sm text-gray-600 dark:text-gray-400")
-            ui.switch(value=ui.dark_mode.value).bind_value(ui.dark_mode, "value").props(
+            ui.switch(value=dark_mode_element.value).bind_value(dark_mode_element, "value").props(
                 "color=primary"
             )
 
